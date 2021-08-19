@@ -1,0 +1,97 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+#handDetection {
+    border: 1px solid black;
+}
+
+#videoInput {
+    display: none;
+}
+
+.signs {
+    display: flex;
+    margin: 8px;
+}
+
+.sign-container {
+    margin: 0 16px;
+}
+
+
+#stop-progress,
+#left-progress,
+#right-progress,
+#forward-progress {
+    width: 100%;
+    background-color: grey;
+}
+
+#stop-progress-bar,
+#left-progress-bar,
+#right-progress-bar,
+#forward-progress-bar {
+    width: 1%;
+    height: 30px;
+    background-color: green;
+}
+
+
+/* Must see what is with this */
+.sign-classifier-btn {
+    box-shadow: 0 0 2px 2px grey;
+}
+
+#sign-0 {
+    border-color: red;
+}
+
+#sign-1 {
+    border-color: green;
+}
+
+#sign-2 {
+    border-color: blue;
+}
+
+.sign-classifier-btn.training {
+    box-shadow: 0 0 2px 2px red;
+}
+
+.sign-classifier-btn.predicted {
+    box-shadow: 0 0 2px 2px green;
+}
+
+.sign-cell {
+    width: 20px;
+}
+
+.sign-0 {
+    background-color: red;
+}
+
+.sign-1 {
+    background-color: green;
+}
+
+.sign-2 {
+    background-color: blue;
+}
+
+.animate {
+    animation: zoom-in-zoom-out 1s ease-out infinite;
+}
+
+@keyframes zoom-in-zoom-out {
+    0% {
+    transform: scale(1, 1);
+    }
+    50% {
+    transform: scale(1.05, 1.05);
+    }
+    100% {
+    transform: scale(1, 1);
+    }
+}
