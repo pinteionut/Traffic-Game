@@ -3,15 +3,262 @@
   padding: 0;
 }
 
-#canvas-container {
+#app-container {
+  width: 90%;
+  height: 1200px;
+  margin: auto;
+  background: whitesmoke;
+  font-family: 'Courier New', Courier, monospace;
+  border: 1px solid darksalmon;
+  margin-top: 20px;
+  position: relative;
+}
+
+#title {
+  text-align: center;
+  padding: 30px;
+}
+
+#menu {
+  text-align: center;
+}
+
+#footer {
+  text-align: center;
+  background-color: darksalmon;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 5px 0;
+}
+
+.option {
+  cursor: pointer;
+  border: 1px solid;
+  width: 300px;
+  padding: 5px;
+  background: white;
+  margin: 10px auto;
+}
+
+.option:hover {
+  background: salmon;
+  color: white;
+}
+
+.display-none {
+  display: none;
+}
+
+
+/* GESTURE LEARNING */
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+#handDetection {
+  border: 1px solid black;
+}
+
+#videoInput {
+  display: none;
+}
+
+.signs {
+  display: flex;
+  margin: 8px;
+}
+
+.sign-container {
+  margin: 0 16px;
+}
+
+
+#stop-progress,
+#left-progress,
+#right-progress,
+#forward-progress {
+  width: 100%;
+  background-color: grey;
+}
+
+#stop-progress-bar,
+#left-progress-bar,
+#right-progress-bar,
+#forward-progress-bar {
+  width: 1%;
+  height: 30px;
+  background-color: green;
+}
+
+
+/* Must see what is with this */
+.sign-classifier-btn {
+  box-shadow: 0 0 2px 2px grey;
+  cursor: pointer;
+}
+
+.sign-classifier-btn:hover {
+  box-shadow: 0 0 2px 2px green;
+}
+
+#sign-0 {
+  border-color: red;
+}
+
+#sign-1 {
+  border-color: green;
+}
+
+#sign-2 {
+  border-color: blue;
+}
+
+.sign-classifier-btn.training {
+  box-shadow: 0 0 2px 2px red;
+}
+
+.sign-classifier-btn.predicted {
+  box-shadow: 0 0 2px 2px green;
+}
+
+.sign-cell {
+  width: 20px;
+}
+
+.sign-0 {
+  background-color: red;
+}
+
+.sign-1 {
+  background-color: green;
+}
+
+.sign-2 {
+  background-color: blue;
+}
+
+.animate {
+  animation: zoom-in-zoom-out 1s ease-out infinite;
+}
+
+.gesture-detail {
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+}
+
+@keyframes zoom-in-zoom-out {
+  0% {
+  transform: scale(1, 1);
+  }
+  50% {
+  transform: scale(1.05, 1.05);
+  }
+  100% {
+  transform: scale(1, 1);
+  }
+}
+
+#proceed-btn {
+  text-align: center;
+  border: 1px solid;
+  width: 300px;
+  margin: 10px auto;
+  padding: 10px;
+  background: white;
+  cursor: pointer;
+}
+
+#proceed-btn:hover {
+  border-color: salmon;
+}
+
+#video-container {
+  position: relative;
+}
+
+
+/* GAME */
+#game-screen {
+  position: relative;
+  text-align: center;
+}
+
+#game-canvas {
+  border: 1px solid;
+}
+
+.display-none {
+  display: none;
+}
+
+#controls-container {
   margin-top: 20px;
   text-align: center;
 }
 
-#canvas {
-  border: 1px solid black;
+#video-output-container {
+  text-align: center;
+  margin-top: 20px;
 }
 
-.mt-10 {
+#video-output {
+  border: 1px solid;
+  margin-top:90px;
+}
+
+#police-siren-container {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: -108px;
+}
+
+#police-siren {
+  width: 700px;
+}
+
+#game-over-wrapper {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 441px;
+}
+
+#game-over-container > h2 {
+  padding: 40px;
+}
+
+#game-over-container > button {
   margin-top: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#game-over-container {
+  width: 782px;
+  margin: auto;
+  height: 100%;
+  background: salmon;
+}
+
+.show-only-game > div:not(#gesture-learning-container) {
+  display: none;
+}
+
+.show-only-game > #game-container {
+  display: block !important;
+}
+
+.show-only-video > #video-container {
+  display: block;
+  text-align: center;
+}
+
+.show-only-video > div {
+  display: none;
 }

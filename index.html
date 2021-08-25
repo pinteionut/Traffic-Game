@@ -4,28 +4,106 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="index.css" rel="stylesheet"/>
-  <script src="app.js" type="module"></script>
-  <title>Document</title>
+  <title>Traffic Control</title>
+  <link href="index.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js" crossorigin="anonymous"></script>
+  <!-- Load TensorFlow.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <!-- Load MobileNet -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+  <!-- Load KNN Classifier -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/knn-classifier"></script>
+  <script src="main.js" type="module"></script>
 </head>
 <body>
-  <div id="canvas-container">
-    <canvas id="canvas" width="800" height="800"></canvas>
-    <div class="mt-10">
-      <button id="traffic-light-right">Traffic Light Right</button>
-      <button id="traffic-light-left">Traffic Light Left</button>
-      <button id="traffic-light-down">Traffic Light Down</button>
-      <button id="traffic-light-up">Traffic Light Up</button>
+  <div id="app-container">
+    <h1 id="title">TRAFFIC CONTROL</h1>
+    <div id="menu">
+      <div id="start-btn" class="option">Start</div>
+      <!-- TODO Add some instructions or remove this div -->
+      <div class="option">Instructions</div>
     </div>
-    <div class="mt-10">
-      <p id="number-of-cars">CARS: 0</p>
+    <div id="gesture-learning-container" class="display-none">
+      <div class="container">
+        <div class="signs">
+          <div class="sign-container">
+            <img id="stop" src="../assets/stop.png" width="200" height="200" />
+            <div id="stop-progress">
+              <div id="stop-progress-bar"></div>
+            </div>
+          </div>
+          <div class="sign-container">
+            <img id="left" src="../assets/left.png" width="200" height="200" />
+            <div id="left-progress">
+              <div id="left-progress-bar"></div>
+            </div>
+          </div>
+          <div class="sign-container">
+            <img id="right" src="../assets/right.png" width="200" height="200" />
+            <div id="right-progress">
+              <div id="right-progress-bar"></div>
+            </div>
+          </div>
+          <div class="sign-container">
+            <img id="forward" src="../assets/forward.png" width="200" height="200" />
+            <div id="forward-progress">
+              <div id="forward-progress-bar"></div>
+            </div>
+          </div>
+        </div>
+        <div id="log"></div>
+      </div>
+      <div class="container" id="video-container">
+        <video id="videoInput" style="display: none;"></video>
+        <canvas id="handDetection" width="780" height="439"></canvas>
+        <div id="game-over-wrapper" class="display-none">
+          <div id="game-over-container">
+            <h2>GAME OVER</h2>
+            <button id="try-again-btn">Try again!</button>
+          </div>
+        </div>
+      </div>
+      <div class="gesture-detail">Right hand: <span id="right-hand-gesture">-</span></div>
+      <div class="gesture-detail">Left hand: <span id="left-hand-gesture">-</span></div>
+      <div id="proceed-btn" class="display-none">Proceed to the Game</div>
     </div>
-    <div class="mt-10">
-      <p id="score">SCORE: 0</p>
+    <div id="game-container" class="display-none">
+      <div id="game-screen">
+        <canvas id="game-canvas" width="960" height="640"></canvas>
+        <img src="assets/map.png" id="map-sprite" class="display-none" />
+        <img src="assets/Viper.png" id="viper-sprite" class="display-none" />
+        <img src="assets/Taxi.png" id="taxi-sprite" class="display-none" />
+        <img src="assets/Car.png" id="car-sprite" class="display-none" />
+        <img src="assets/Audi.png" id="audi-sprite" class="display-none" />
+        <img src="assets/Minitruck.png" id="minitruck-sprite" class="display-none" />
+        <img src="assets/boom.png" id="boom-sprite" class="display-none" />
+        <img
+          src="assets/traffic-lights.png"
+          id="traffic-lights-sprite"
+          class="display-none"
+        />
+      </div>
+      <div id="controls-container">
+        <div>
+          Left hand ( horizontal):
+          <input type="radio" name="left-hand" value="stop" checked="true" id="default-left" /> Stop
+          <input type="radio" name="left-hand" value="forward" /> Forward
+          <input type="radio" name="left-hand" value="left" /> Left
+          <input type="radio" name="left-hand" value="right" /> Right
+        </div>
+        <div>
+          Right hand ( vertical):
+          <input type="radio" name="right-hand" value="stop" checked="true" id="default-right" />
+          Stop <input type="radio" name="right-hand" value="forward" /> Forward
+          <input type="radio" name="right-hand" value="left" /> Left
+          <input type="radio" name="right-hand" value="right" /> Right
+        </div>
+      </div>
     </div>
-    <div class="mt-10">
-      <p id="status"></p>
-    </div>
+    <div id="footer">Andrei Rus, Ionut Pinte - PW 2021</div>
   </div>
 </body>
 </html>
