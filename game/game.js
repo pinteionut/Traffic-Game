@@ -3,7 +3,7 @@ import generateCar from "./car_generator.js";
 export default class Game {
   constructor() {
     const canvasElement = document.getElementById("game-canvas");
-    this.ctx = canvasElement.getContext("2d");
+    this.ctx = canvasElement.getContext("2d", { alpha: false });
     this.ctx.imageSmoothingEnabled = false;
     this.laneWidth = 250;
     this.canvas = {
@@ -21,6 +21,8 @@ export default class Game {
     };
     this.cars = [];
     this.lastCarFrom = {};
+    this.mapSprite = document.getElementById('map-sprite');
+    this.trafficLightsSprite = document.getElementById('traffic-lights-sprite');
   }
 
   start() {
@@ -80,16 +82,14 @@ export default class Game {
   }
 
   drawMap() {
-    this.ctx.drawImage(document.getElementById("map-sprite"), 0, 0);
+    this.ctx.drawImage(this.mapSprite, 0, 0);
   }
 
   drawTrafficLights() {
-    const sprite = document.getElementById("traffic-lights-sprite");
-
     switch (this.horizontalStatus) {
       case "stop":
         this.ctx.drawImage(
-          sprite,
+          this.trafficLightsSprite,
           this.trafficLightsDx.stop,
           0,
           20,
@@ -100,7 +100,7 @@ export default class Game {
           20
         );
         this.ctx.drawImage(
-          sprite,
+          this.trafficLightsSprite,
           this.trafficLightsDx.stop,
           0,
           20,
@@ -113,7 +113,7 @@ export default class Game {
         break;
       case "forward":
         this.ctx.drawImage(
-          sprite,
+          this.trafficLightsSprite,
           this.trafficLightsDx.left,
           0,
           20,
@@ -124,7 +124,7 @@ export default class Game {
           20
         );
         this.ctx.drawImage(
-          sprite,
+          this.trafficLightsSprite,
           this.trafficLightsDx.right,
           0,
           20,
@@ -137,7 +137,7 @@ export default class Game {
         break;
       case "left":
         this.ctx.drawImage(
-          sprite,
+          this.trafficLightsSprite,
           this.trafficLightsDx.bottom,
           0,
           20,
@@ -148,7 +148,7 @@ export default class Game {
           20
         );
         this.ctx.drawImage(
-          sprite,
+          this.trafficLightsSprite,
           this.trafficLightsDx.top,
           0,
           20,
@@ -161,7 +161,7 @@ export default class Game {
         break;
       case "right":
         this.ctx.drawImage(
-          sprite,
+          this.trafficLightsSprite,
           this.trafficLightsDx.top,
           0,
           20,
@@ -172,7 +172,7 @@ export default class Game {
           20
         );
         this.ctx.drawImage(
-          sprite,
+          this.trafficLightsSprite,
           this.trafficLightsDx.bottom,
           0,
           20,
@@ -187,7 +187,7 @@ export default class Game {
     switch (this.verticalStatus) {
       case "stop":
         this.ctx.drawImage(
-          sprite,
+          this.trafficLightsSprite,
           this.trafficLightsDx.stop,
           0,
           20,
@@ -198,7 +198,7 @@ export default class Game {
           20
         );
         this.ctx.drawImage(
-          sprite,
+          this.trafficLightsSprite,
           this.trafficLightsDx.stop,
           0,
           20,
@@ -211,7 +211,7 @@ export default class Game {
         break;
       case "forward":
         this.ctx.drawImage(
-          sprite,
+          this.trafficLightsSprite,
           this.trafficLightsDx.bottom,
           0,
           20,
@@ -222,7 +222,7 @@ export default class Game {
           20
         );
         this.ctx.drawImage(
-          sprite,
+          this.trafficLightsSprite,
           this.trafficLightsDx.top,
           0,
           20,
@@ -235,7 +235,7 @@ export default class Game {
         break;
       case "left":
         this.ctx.drawImage(
-          sprite,
+          this.trafficLightsSprite,
           this.trafficLightsDx.right,
           0,
           20,
@@ -246,7 +246,7 @@ export default class Game {
           20
         );
         this.ctx.drawImage(
-          sprite,
+          this.trafficLightsSprite,
           this.trafficLightsDx.left,
           0,
           20,
@@ -259,7 +259,7 @@ export default class Game {
         break;
       case "right":
         this.ctx.drawImage(
-          sprite,
+          this.trafficLightsSprite,
           this.trafficLightsDx.left,
           0,
           20,
@@ -270,7 +270,7 @@ export default class Game {
           20
         );
         this.ctx.drawImage(
-          sprite,
+          this.trafficLightsSprite,
           this.trafficLightsDx.right,
           0,
           20,

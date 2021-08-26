@@ -40,6 +40,7 @@ export default class GestureClassifier {
   }
 
   addExample(image, log) {
+    if (this.game) return;
     if (!this.trainingClass && this.defaultExamples > 50) return;
 
     const img = tf.browser.fromPixels(image);

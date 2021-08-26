@@ -211,17 +211,6 @@
   margin-top:90px;
 }
 
-#police-siren-container {
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  top: -108px;
-}
-
-#police-siren {
-  width: 700px;
-}
-
 #game-over-wrapper {
   position: absolute;
   top: 0px;

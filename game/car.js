@@ -1,13 +1,18 @@
 import detectCollision from "./sat_collision.js";
 
-const CAR_TYPES = ['taxi', 'viper', 'audi', 'minitruck', 'car']
+const CAR_SPRITES = [
+  document.getElementById('taxi-sprite'),
+  document.getElementById('viper-sprite'),
+  document.getElementById('audi-sprite'),
+  document.getElementById('minitruck-sprite'),
+  document.getElementById('car-sprite'),
+]
 
 export default class Car {
   constructor(game) {
-    this.type = CAR_TYPES[Math.floor(Math.random() * CAR_TYPES.length)]
     this.width = 60;
     this.height = 125;
-    this.sprite = document.getElementById(`${this.type}-sprite`);
+    this.sprite = CAR_SPRITES[Math.floor(Math.random() * CAR_SPRITES.length)]
     this.game = game;
   }
 
